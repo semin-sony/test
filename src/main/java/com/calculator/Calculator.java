@@ -39,7 +39,7 @@ public class Calculator {
         expression = expression.trim();
         
         // 패턴: 숫자 연산자 숫자 (공백 선택적)
-        Pattern pattern = Pattern.compile("^\\s*(-?\\d+\\.?\\d*)\\s*([+\\-*/])\\s*(-?\\d+\\.?\\d*)\\s*$");
+        Pattern pattern = Pattern.compile("^\\s*(-?(?:\\d+\\.\\d*|\\d*\\.\\d+|\\d+))\\s*([+\\-*/])\\s*(-?(?:\\d+\\.\\d*|\\d*\\.\\d+|\\d+))\\s*$");
         Matcher matcher = pattern.matcher(expression);
         
         if (!matcher.matches()) {
@@ -76,7 +76,7 @@ public class Calculator {
     }
     
     public static double divide(double a, double b) {
-        if (b == 0) {
+        if (Math.abs(b) < 1e-10) {
             throw new ArithmeticException("0으로 나눌 수 없습니다.");
         }
         return a / b;
